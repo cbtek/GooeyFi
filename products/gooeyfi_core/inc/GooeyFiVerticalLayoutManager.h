@@ -1,5 +1,5 @@
 /*
- GooeyFiWidget.hpp
+ GooeyFiVerticalLayoutManager.h
  
 MIT License
 
@@ -27,30 +27,44 @@ SOFTWARE.
 
 #pragma once
 
-#include <memory>
+#include "GooeyFiLayoutManager.hpp"
 
 namespace cbtek {
 namespace products {
 namespace gooeyfi {
 namespace core {
 
-enum class GooeyFiWidgetType
-{
-    TextInput,
-    PathBrowser,
-    Numeric,
-    Button
-};
 
-class GooeyFiWidget 
+class GooeyFiVerticalLayoutManager :public GooeyFiLayoutManager
 {
 public:
+    //! Constructor for GooeyFiVerticalLayoutManager
+    /*!
+        Detailed description for GooeyFiVerticalLayoutManager
+    */
+    GooeyFiVerticalLayoutManager();
+        /**
+    * @brief Setter for m_widgets
+    * @param Value to replace m_widgets
+    */
+    void setWidgets(const std::vector<GooeyFiWidgetPtr> & value);
 
-    GooeyFiWidgetType getWidgetType() const;
 
-    //! Virtual Destructor
-    virtual ~GooeyFiWidget(){}
+        /**
+    * @brief Getter for m_widgets
+    * @return Return copy of m_widgets
+    */
+    const std::vector<GooeyFiWidgetPtr> & getWidgets() const;
+
+
+
+    //! Destructor
+    ~GooeyFiVerticalLayoutManager();	
+
+private:
+        std::vector<GooeyFiWidgetPtr> m_widgets;
+
 };
-typedef std::shared_ptr<GooeyFiWidget> GooeyFiWidgetPtr;
 }}}}//end namespace
+
 

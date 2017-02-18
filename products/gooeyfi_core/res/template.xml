@@ -1,0 +1,9 @@
+
+<GooeyApp title="" icon="">
+    <GooeyPage label="" layout="Grid|Vertical|Horizontal" icon="" >
+        <GooeyWidget id="TextInput" label="" value="" style="Single|Multi" />
+        <GooeyWidget id="PathBrowser" label="" value="" style="File|Folder" />
+        <GooeyWidget id="Numeric" label="" value="" min="" max="" increment="" style="Integer|Float"/>
+        <GooeyWidget id="Button" label="Launch" value="notepad" style="Action|Radio|Check"/>
+    </GooeyPage>
+</GooeyApp>

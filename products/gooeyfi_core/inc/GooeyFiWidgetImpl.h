@@ -1,5 +1,5 @@
 /*
- GooeyFiWidget.hpp
+ GooeyFiWidgetImpl.h
  
 MIT License
 
@@ -27,30 +27,72 @@ SOFTWARE.
 
 #pragma once
 
-#include <memory>
+#include "GooeyFiWidget.hpp"
+#include <string>
 
 namespace cbtek {
 namespace products {
 namespace gooeyfi {
 namespace core {
 
-enum class GooeyFiWidgetType
-{
-    TextInput,
-    PathBrowser,
-    Numeric,
-    Button
-};
 
-class GooeyFiWidget 
+class GooeyFiWidgetImpl :public GooeyFiWidget
 {
 public:
+    //! Constructor for GooeyFiWidgetImpl
+    /*!
+        Detailed description for GooeyFiWidgetImpl
+    */
+    GooeyFiWidgetImpl();
 
-    GooeyFiWidgetType getWidgetType() const;
+    /**
+    * @brief Setter for m_widgetType
+    * @param Value to replace m_widgetType
+    */
+    void setWidgetType(const GooeyFiWidgetType & value);
 
-    //! Virtual Destructor
-    virtual ~GooeyFiWidget(){}
+    /**
+    * @brief Setter for m_label
+    * @param Value to replace m_label
+    */
+    void setLabel(const std::string & value);
+
+    /**
+    * @brief Setter for m_id
+    * @param Value to replace m_id
+    */
+    void setId(const std::string & value);
+
+
+        /**
+    * @brief Getter for m_widgetType
+    * @return Return copy of m_widgetType
+    */
+    const GooeyFiWidgetType & getWidgetType() const;
+
+    /**
+    * @brief Getter for m_label
+    * @return Return copy of m_label
+    */
+    const std::string & getLabel() const;
+
+    /**
+    * @brief Getter for m_id
+    * @return Return copy of m_id
+    */
+    const std::string & getId() const;
+
+
+
+    //! Destructor
+    ~GooeyFiWidgetImpl();	
+
+private:
+        GooeyFiWidgetType m_widgetType;
+    std::string m_label;
+    std::string m_id;
+
 };
-typedef std::shared_ptr<GooeyFiWidget> GooeyFiWidgetPtr;
 }}}}//end namespace
+
 

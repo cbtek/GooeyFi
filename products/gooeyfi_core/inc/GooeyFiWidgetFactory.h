@@ -1,5 +1,5 @@
 /*
- GooeyFiWidget.hpp
+ GooeyFiWidgetFactory.h
  
 MIT License
 
@@ -24,33 +24,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-
 #pragma once
 
-#include <memory>
+#include "GooeyFiWidget.hpp"
 
 namespace cbtek {
 namespace products {
 namespace gooeyfi {
 namespace core {
 
-enum class GooeyFiWidgetType
-{
-    TextInput,
-    PathBrowser,
-    Numeric,
-    Button
-};
 
-class GooeyFiWidget 
+class GooeyFiWidgetFactory 
 {
 public:
+    GooeyFiWidgetPtr create(const std::string& commaSeperatedNameValuePairsParams);
 
-    GooeyFiWidgetType getWidgetType() const;
+private:
+    //! Private constructor for GooeyFiWidgetFactory
+	GooeyFiWidgetFactory();
 
-    //! Virtual Destructor
-    virtual ~GooeyFiWidget(){}
+    //! Private copy constructor for GooeyFiWidgetFactory
+	GooeyFiWidgetFactory(const GooeyFiWidgetFactory &);
+
+	//! Private destructor for GooeyFiWidgetFactory
+	~GooeyFiWidgetFactory();	
 };
-typedef std::shared_ptr<GooeyFiWidget> GooeyFiWidgetPtr;
 }}}}//end namespace
+
 

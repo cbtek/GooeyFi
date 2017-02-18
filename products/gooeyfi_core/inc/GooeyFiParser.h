@@ -30,7 +30,8 @@ SOFTWARE.
 
 namespace cbtek {
 namespace products {
-namespace gooeyfi_core {
+namespace gooeyfi {
+namespace core {
 
 class GooeyFiParser 
 {
@@ -49,6 +50,6 @@ public:
 private:
     
 };
-}}}//end namespace
+}}}}//end namespace
 
 

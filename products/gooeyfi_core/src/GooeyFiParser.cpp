@@ -31,7 +31,8 @@ SOFTWARE.
 
 namespace cbtek {
 namespace products {
-namespace gooeyfi_core {
+namespace gooeyfi {
+namespace core {
 
 
 GooeyFiParser::GooeyFiParser(const std::string &filePath)
@@ -47,6 +48,6 @@ GooeyFiParser::~GooeyFiParser()
 
 
 
-}}}//end namespace
+}}}}//end namespace
 
 

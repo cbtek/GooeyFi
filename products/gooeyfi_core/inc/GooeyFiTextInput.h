@@ -1,5 +1,5 @@
 /*
- GooeyFiWidget.hpp
+ GooeyFiTextInput.h
  
 MIT License
 
@@ -27,30 +27,52 @@ SOFTWARE.
 
 #pragma once
 
-#include <memory>
+#include "GooeyFiWidgetImpl.h"
+#include <string>
 
 namespace cbtek {
 namespace products {
 namespace gooeyfi {
 namespace core {
 
-enum class GooeyFiWidgetType
+enum class GooeyFiTextInputType
 {
-    TextInput,
-    PathBrowser,
-    Numeric,
-    Button
+    SingleLine,
+    MultiLine,
+    Password
 };
 
-class GooeyFiWidget 
+
+class GooeyFiTextInput :public GooeyFiWidgetImpl
 {
 public:
+    //! Constructor for GooeyFiTextInput
+    /*!
+        Detailed description for GooeyFiTextInput
+    */
+    GooeyFiTextInput();
+        /**
+    * @brief Setter for m_text
+    * @param Value to replace m_text
+    */
+    void setText(const std::string & value);
 
-    GooeyFiWidgetType getWidgetType() const;
 
-    //! Virtual Destructor
-    virtual ~GooeyFiWidget(){}
+        /**
+    * @brief Getter for m_text
+    * @return Return copy of m_text
+    */
+    const std::string & getText() const;
+
+
+
+    //! Destructor
+    ~GooeyFiTextInput();	
+
+private:
+        std::string m_text;
+
 };
-typedef std::shared_ptr<GooeyFiWidget> GooeyFiWidgetPtr;
 }}}}//end namespace
+
 
