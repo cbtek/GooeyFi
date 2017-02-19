@@ -35,12 +35,31 @@ namespace gooeyfi {
 namespace core {
 
 
+inline static std::string getNumericTypeStr(GooeyFiNumericType type)
+{
+    if (type == GooeyFiNumericType::Float)
+    {
+        return "FLOAT";
+    }
+    else return "INTEGER";
+}
+
 GooeyFiNumeric::GooeyFiNumeric()
 {
     m_min = 0;
     m_max = 100;
     m_value = 0;
     m_increment = 1;
+}
+
+void GooeyFiNumeric::setType(GooeyFiNumericType type)
+{
+    m_type = type;
+}
+
+GooeyFiNumericType GooeyFiNumeric::getType() const
+{
+    return m_type;
 }
 
 GooeyFiNumeric::~GooeyFiNumeric()
@@ -86,6 +105,20 @@ double GooeyFiNumeric::getMin() const
 double GooeyFiNumeric::getMax() const
 {
     return m_max;
+}
+
+void GooeyFiNumeric::write(common::utility::XMLStreamWriter &xml)
+{
+    xml.writeAttribute("value",std::to_string(m_value));
+    xml.writeAttribute("min",std::to_string(m_min));
+    xml.writeAttribute("max",std::to_string(m_max));
+    xml.writeAttribute("increment",std::to_string(m_increment));
+    xml.writeAttribute("style",getNumericTypeStr(m_type));
+}
+
+GooeyFiWidgetType GooeyFiNumeric::getWidgetType() const
+{
+    return GooeyFiWidgetType::Numeric;
 }
 
 

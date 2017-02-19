@@ -37,8 +37,8 @@ namespace core {
 
 enum class GooeyFiNumericType
 {
-    FLOAT,
-    INTEGER
+    Float,
+    Integer
 };
 
 class GooeyFiNumeric :public GooeyFiWidgetImpl
@@ -49,7 +49,19 @@ public:
         Detailed description for GooeyFiNumeric
     */
     GooeyFiNumeric();
-        /**
+
+    /**
+     * @brief setType
+     * @param type
+     */
+    void setType(GooeyFiNumericType type);
+
+    /**
+     * @brief getType
+     * @return
+     */
+    GooeyFiNumericType getType() const;
+    /**
     * @brief Setter for m_value
     * @param Value to replace m_value
     */
@@ -99,12 +111,24 @@ public:
     double getMax() const;
 
 
+    /**
+     * @brief write
+     * @param xml
+     */
+    void write(cbtek::common::utility::XMLStreamWriter& xml);
+
+    /**
+     * @brief getWidgetType
+     * @return
+     */
+    GooeyFiWidgetType getWidgetType() const;
 
     //! Destructor
     ~GooeyFiNumeric();	
 
 private:
 
+    GooeyFiNumericType m_type;
     double m_value;
     double m_increment;
     double m_min;

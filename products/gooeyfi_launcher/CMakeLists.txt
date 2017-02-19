@@ -36,12 +36,16 @@ add_executable(${CURR_TARGET}
 # Add Dependencies
 #==============================================================================
 
-#add_dependencies(${CURR_TARGET}  )
+add_dependencies(${CURR_TARGET}
+                  gooeyfi_core
+                  common_utils)
 
 #==============================================================================
 # Target Link Libraries
 #==============================================================================
-#target_link_libraries(${CURR_TARGET})
+target_link_libraries(${CURR_TARGET}
+                        gooeyfi_core
+                        common_utils)
 
 
 

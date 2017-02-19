@@ -34,6 +34,18 @@ namespace products {
 namespace gooeyfi {
 namespace core {
 
+inline static std::string getButtonTypeStr(GooeyFiButtonType type)
+{
+    if (type == GooeyFiButtonType::Action)
+    {
+        return "ACTION";
+    }
+    else if (type == GooeyFiButtonType::Checkbox)
+    {
+        return "CHECKBOX";
+    }
+    else return "RADIO";
+}
 
 GooeyFiButton::GooeyFiButton()
 {
@@ -45,16 +57,37 @@ GooeyFiButton::~GooeyFiButton()
 
 }
 
-void GooeyFiButton::setButtonType(const GooeyFiButtonType & value)
+void GooeyFiButton::setType(const GooeyFiButtonType & value)
 {
-    m_buttonType=value;
+    m_type=value;
 }
 
 
 
-const GooeyFiButtonType &GooeyFiButton::getButtonType() const
+const GooeyFiButtonType &GooeyFiButton::getType() const
 {
-    return m_buttonType;
+    return m_type;
+}
+
+void GooeyFiButton::write(common::utility::XMLStreamWriter &xml)
+{
+    xml.writeAttribute("value",m_data);
+    xml.writeAttribute("style",getButtonTypeStr(m_type));
+}
+
+void GooeyFiButton::setData(const std::string &data)
+{
+    m_data=data;
+}
+
+std::string GooeyFiButton::getData() const
+{
+    return m_data;
+}
+
+GooeyFiWidgetType GooeyFiButton::getWidgetType() const
+{
+    return GooeyFiWidgetType::Button;
 }
 
 

@@ -35,6 +35,7 @@ SOFTWARE.
 #include "GooeyFiPathBrowser.h"
 
 #include "utility/inc/StringUtils.hpp"
+#include "utility/inc/Exception.hpp"
 
 using namespace cbtek::common::utility;
 
@@ -43,8 +44,12 @@ namespace products {
 namespace gooeyfi {
 namespace core {
 
-GooeyFiWidgetPtr GooeyFiWidgetFactory::create(const std::string& commaSeperatedNameValuePairsParams)
+CREATE_EXCEPTION_NO_MSG(InvalidGooeyFiWidgetException)
+
+GooeyFiWidgetPtr GooeyFiWidgetFactory::create(const std::string& commaSeperatedNameValuePairParams)
 {
+
+    //read all name-value pairs into nameValueMap
     std::vector<std::string> pairs;
     std::map<std::string, std::string> nameValueMap;
     pairs = StringUtils::split(commaSeperatedNameValuePairParams, ",");
@@ -63,10 +68,9 @@ GooeyFiWidgetPtr GooeyFiWidgetFactory::create(const std::string& commaSeperatedN
         }
     }
 
-
     std::string typeValue = StringUtils::toUpperTrimmed(nameValueMap["TYPE"]);
+    std::string subType = StringUtils::toUpperTrimmed(nameValueMap["STYLE"]);
 
-    std::string subType = StringUtils::toUpperTrimmed(nameValueMap["TYPE"]);
     if (typeValue == "TEXTINPUT")
     {
         GooeyFiTextInput widget;
@@ -74,10 +78,11 @@ GooeyFiWidgetPtr GooeyFiWidgetFactory::create(const std::string& commaSeperatedN
         widget.setId(nameValueMap["ID"]);
         if (subType == "MULTI")
         {
-            widget.setWidgetType(GooeyFiTextInputType::MultiLine);
+            widget.setType(GooeyFiTextInputType::MultiLine);
         }
-        else widget.setWidgetType(GooeyFiTextInputType::SingleLine);
+        else widget.setType(GooeyFiTextInputType::SingleLine);
         widget.setText(nameValueMap["value"]);
+        return GooeyFiWidgetPtr(new GooeyFiTextInput(widget));
     }
     else if (typeValue == "NUMERIC")
     {
@@ -86,29 +91,46 @@ GooeyFiWidgetPtr GooeyFiWidgetFactory::create(const std::string& commaSeperatedN
         widget.setId(nameValueMap["ID"]);
         if (subType == "FLOAT")
         {
-            widget.setWidgetType(GooeyFiNumericType::FLOAT);
+            widget.setType(GooeyFiNumericType::Float);
         }
-        else widget.setWidgetType(GooeyFiNumericType::INTEGER);
-        widget.setIncrement(std::strtold(nameValueMap["increment"]));
-        widget.setMin(std::strtold(nameValueMap["min"]));
-        widget.setMax(std::strtold(nameValueMap["max"]));
-        widget.setValue(std::strtold(nameValueMap["value"]));
+        else widget.setType(GooeyFiNumericType::Integer);
+        widget.setIncrement(StringUtils::toFloat64(nameValueMap["increment"]));
+        widget.setMin(StringUtils::toFloat64(nameValueMap["min"]));
+        widget.setMax(StringUtils::toFloat64(nameValueMap["max"]));
+        widget.setValue(StringUtils::toFloat64(nameValueMap["value"]));
+        return GooeyFiWidgetPtr(new GooeyFiNumeric(widget));
     }
     else if (typeValue == "BUTTON")
     {
-
+        GooeyFiButton widget;
+        widget.setLabel(nameValueMap["LABEL"]);
+        widget.setId(nameValueMap["ID"]);
+        if (subType == "ACTION")
+        {
+            widget.setType(GooeyFiButtonType::Action);
+        }
+        else if (subType == "CHECKBOX")
+        {
+            widget.setType(GooeyFiButtonType::Checkbox);
+        }
+        else widget.setType(GooeyFiButtonType::Radio);
+        return GooeyFiWidgetPtr(new GooeyFiButton(widget));
     }
     else if (typeValue == "PATHBROWSER")
     {
-
+        GooeyFiPathBrowser widget;
+        widget.setLabel(nameValueMap["LABEL"]);
+        widget.setId(nameValueMap["ID"]);
+        if (subType == "FILE")
+        {
+            widget.setType(GooeyFiPathBrowserType::File);
+        }
+        else widget.setType(GooeyFiPathBrowserType::Folder);
+        return GooeyFiWidgetPtr(new GooeyFiPathBrowser(widget));
     }
 
-
-
-
-
+    throw InvalidGooeyFiWidgetException(EXCEPTION_TAG_LINE+"Could not detect widget type from data sent in.  Data="+commaSeperatedNameValuePairParams);
 }
-
 
 
 }}}}//end namespace

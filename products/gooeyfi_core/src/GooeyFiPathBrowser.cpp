@@ -34,6 +34,14 @@ namespace products {
 namespace gooeyfi {
 namespace core {
 
+inline static std::string getPathBrowserTypeStr(GooeyFiPathBrowserType type)
+{
+    if (type == GooeyFiPathBrowserType::File)
+    {
+        return "FILE";
+    }
+    else return "FOLDER";
+}
 
 GooeyFiPathBrowser::GooeyFiPathBrowser()
 {
@@ -45,9 +53,9 @@ GooeyFiPathBrowser::~GooeyFiPathBrowser()
 
 }
 
-void GooeyFiPathBrowser::setButtonType(const GooeyFiPathBrowserType & value)
+void GooeyFiPathBrowser::setType(const GooeyFiPathBrowserType & value)
 {
-    m_buttonType=value;
+    m_type=value;
 }
 
 void GooeyFiPathBrowser::setPathValue(const std::string & value)
@@ -60,11 +68,9 @@ void GooeyFiPathBrowser::setBrowseButtonLabel(const std::string & value)
     m_browseButtonLabel=value;
 }
 
-
-
-const GooeyFiPathBrowserType &GooeyFiPathBrowser::getButtonType() const
+const GooeyFiPathBrowserType &GooeyFiPathBrowser::getType() const
 {
-    return m_buttonType;
+    return m_type;
 }
 
 const std::string &GooeyFiPathBrowser::getPathValue() const
@@ -75,6 +81,17 @@ const std::string &GooeyFiPathBrowser::getPathValue() const
 const std::string &GooeyFiPathBrowser::getBrowseButtonLabel() const
 {
     return m_browseButtonLabel;
+}
+
+GooeyFiWidgetType GooeyFiPathBrowser::getWidgetType() const
+{
+    return GooeyFiWidgetType::PathBrowser;
+}
+
+void GooeyFiPathBrowser::write(common::utility::XMLStreamWriter &xml)
+{
+    xml.writeAttribute("value",m_pathValue);
+    xml.writeAttribute("style",getPathBrowserTypeStr(m_type));
 }
 
 

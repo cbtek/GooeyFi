@@ -50,12 +50,23 @@ public:
     void setWidgets(const std::vector<GooeyFiWidgetPtr> & value);
 
 
+    /**
+     * @brief addWidget
+     * @param widget
+     */
+    void addWidget(const GooeyFiWidgetPtr& widget);
+
         /**
     * @brief Getter for m_widgets
     * @return Return copy of m_widgets
     */
-    const std::vector<GooeyFiWidgetPtr> & getWidgets() const;
+     const std::vector<GooeyFiWidgetPtr>& getWidgets() const;
 
+    /**
+     * @brief getType
+     * @return
+     */
+    GooeyFiLayoutManagerType getType() const;
 
 
     //! Destructor

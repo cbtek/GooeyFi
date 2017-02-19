@@ -52,25 +52,50 @@ public:
     */
     GooeyFiButton();
         /**
-    * @brief Setter for m_buttonType
-    * @param Value to replace m_buttonType
+    * @brief Setter for m_type
+    * @param Value to replace m_type
     */
-    void setButtonType(const GooeyFiButtonType & value);
+    void setType(const GooeyFiButtonType & value);
 
 
         /**
-    * @brief Getter for m_buttonType
-    * @return Return copy of m_buttonType
+    * @brief Getter for m_type
+    * @return Return copy of m_type
     */
-    const GooeyFiButtonType & getButtonType() const;
+    const GooeyFiButtonType & getType() const;
 
+
+    /**
+     * @brief write
+     * @param xml
+     */
+    void write(cbtek::common::utility::XMLStreamWriter& xml);
+
+    /**
+     * @brief setData
+     * @param data
+     */
+    void setData(const std::string& data);
+
+    /**
+     * @brief getData
+     * @return
+     */
+    std::string getData() const;
+
+    /**
+     * @brief getWidgetType
+     * @return
+     */
+    GooeyFiWidgetType getWidgetType() const;
 
 
     //! Destructor
     ~GooeyFiButton();	
 
 private:
-        GooeyFiButtonType m_buttonType;
+        GooeyFiButtonType m_type;
+        std::string m_data;
 
 };
 }}}}//end namespace

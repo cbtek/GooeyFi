@@ -50,11 +50,21 @@ void GooeyFiHorizontalLayoutManager::setWidgets(const std::vector<GooeyFiWidgetP
     m_widgets=value;
 }
 
+void GooeyFiHorizontalLayoutManager::addWidget(const GooeyFiWidgetPtr &widget)
+{
+    m_widgets.push_back(widget);
+}
+
 
 
 const std::vector<GooeyFiWidgetPtr> &GooeyFiHorizontalLayoutManager::getWidgets() const
 {
     return m_widgets;
+}
+
+GooeyFiLayoutManagerType GooeyFiHorizontalLayoutManager::getType() const
+{
+    return GooeyFiLayoutManagerType::Horizontal;
 }
 
 

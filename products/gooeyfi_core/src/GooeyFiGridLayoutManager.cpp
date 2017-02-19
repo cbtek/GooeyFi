@@ -37,7 +37,8 @@ namespace core {
 
 GooeyFiGridLayoutManager::GooeyFiGridLayoutManager()
 {
-
+    m_maxColumns = m_maxRows = 4;
+    m_currentColumn = m_currentRow = 0;
 }
 
 GooeyFiGridLayoutManager::~GooeyFiGridLayoutManager()
@@ -45,16 +46,49 @@ GooeyFiGridLayoutManager::~GooeyFiGridLayoutManager()
 
 }
 
-void GooeyFiGridLayoutManager::setWidgets(const std::map<std::pair<size_t,size_t>, GooeyFiWidgetPtr> & value)
+
+void GooeyFiGridLayoutManager::addWidget(const GooeyFiWidgetPtr &widget)
 {
-    m_widgets=value;
+    if (m_currentColumn >= m_maxColumns)
+    {
+        m_currentColumn = 0;
+        m_currentRow++;
+    }
+    if (m_currentRow >= m_maxRows)
+    {
+        m_currentRow = 0;
+        m_currentColumn++;
+    }
+    if (m_currentRow >= m_maxRows &&
+        m_currentColumn >= m_maxColumns)
+    {
+         m_maxRows++;
+         m_maxColumns++;
+    }
+
+    m_widgets.push_back(widget);
+    m_currentColumn++;
 }
 
 
-
-const std::map<std::pair<size_t,size_t>, GooeyFiWidgetPtr> &GooeyFiGridLayoutManager::getWidgets() const
+const std::vector<GooeyFiWidgetPtr> &GooeyFiGridLayoutManager::getWidgets() const
 {
     return m_widgets;
+}
+
+void GooeyFiGridLayoutManager::setMaxRows(size_t rows)
+{
+    m_maxRows = rows;
+}
+
+void GooeyFiGridLayoutManager::setMaxColumns(size_t columns)
+{
+    m_maxColumns=columns;
+}
+
+GooeyFiLayoutManagerType GooeyFiGridLayoutManager::getType() const
+{
+    return GooeyFiLayoutManagerType::Grid;
 }
 
 

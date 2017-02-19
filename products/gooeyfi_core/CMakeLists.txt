@@ -24,4 +24,5 @@ add_library(${CURR_TARGET}
             ${CURR_TARGET_SOURCES}
             ${CURR_TARGET_HEADERS})
 
-#add_dependencies(${CURR_TARGET}   common_utils)
+add_dependencies(${CURR_TARGET}
+                 common_utils)

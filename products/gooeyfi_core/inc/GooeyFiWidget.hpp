@@ -29,6 +29,8 @@ SOFTWARE.
 
 #include <memory>
 
+#include "utility/inc/XMLStreamWriter.h"
+
 namespace cbtek {
 namespace products {
 namespace gooeyfi {
@@ -42,11 +44,38 @@ enum class GooeyFiWidgetType
     Button
 };
 
+inline static std::string getWidgetTypeStr(GooeyFiWidgetType type)
+{
+    if (type == GooeyFiWidgetType::Button)
+    {
+        return "BUTTON";
+    }
+    else if (type == GooeyFiWidgetType::Numeric)
+    {
+        return "NUMERIC";
+    }
+    else if (type == GooeyFiWidgetType::PathBrowser)
+    {
+        return "PATHBROWSER";
+    }
+    else return "TEXTINPUT";
+}
+
 class GooeyFiWidget 
 {
 public:
 
-    GooeyFiWidgetType getWidgetType() const;
+    /**
+     * @brief getWidgetType
+     * @return
+     */
+    virtual GooeyFiWidgetType getWidgetType() const = 0;
+
+    /**
+     * @brief write
+     * @param xml
+     */
+    virtual void write(cbtek::common::utility::XMLStreamWriter& xml) = 0;
 
     //! Virtual Destructor
     virtual ~GooeyFiWidget(){}

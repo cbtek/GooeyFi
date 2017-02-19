@@ -18,8 +18,11 @@ if (WIN32)
 endif()
 
 include_directories("${PROJECT_SOURCE_DIR}/common")
+include_directories("${PROJECT_SOURCE_DIR}/products")
 
 #Added simple testbed project.  
+
+add_subdirectory("${PROJECT_SOURCE_DIR}/common/utility")
 add_subdirectory("${PROJECT_SOURCE_DIR}/products/test_GooeyFi")
 add_subdirectory("${PROJECT_SOURCE_DIR}/products/gooeyfi_core")
 add_subdirectory("${PROJECT_SOURCE_DIR}/products/gooeyfi_launcher")

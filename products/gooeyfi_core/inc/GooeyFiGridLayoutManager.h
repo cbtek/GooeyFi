@@ -44,26 +44,41 @@ public:
         Detailed description for GooeyFiGridLayoutManager
     */
     GooeyFiGridLayoutManager();
-        /**
-    * @brief Setter for m_widgets
-    * @param Value to replace m_widgets
-    */
-    void setWidgets(const std::map<std::pair<size_t,size_t>, GooeyFiWidgetPtr> & value);
 
+    /**
+     * @brief addWidget
+     * @param widget
+     */
+    void addWidget(const GooeyFiWidgetPtr& widget);
 
         /**
     * @brief Getter for m_widgets
     * @return Return copy of m_widgets
     */
-    const std::map<std::pair<size_t,size_t>, GooeyFiWidgetPtr> & getWidgets() const;
+     const std::vector<GooeyFiWidgetPtr>& getWidgets() const;
 
+    void setMaxRows(size_t rows);
+
+    void setMaxColumns(size_t columns);
+
+
+
+    /**
+     * @brief getType
+     * @return
+     */
+    GooeyFiLayoutManagerType getType() const;
 
 
     //! Destructor
     ~GooeyFiGridLayoutManager();	
 
 private:
-        std::map<std::pair<size_t,size_t>, GooeyFiWidgetPtr> m_widgets;
+        std::vector<GooeyFiWidgetPtr> m_widgets;
+        size_t m_maxRows;
+        size_t m_maxColumns;
+        size_t m_currentRow;
+        size_t m_currentColumn;
 
 };
 }}}}//end namespace

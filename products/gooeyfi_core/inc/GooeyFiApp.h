@@ -1,5 +1,5 @@
 /*
- GooeyFiParser.h
+ GooeyFiApp.h
  
 MIT License
 
@@ -27,28 +27,70 @@ SOFTWARE.
 
 #pragma once
 
+#include "GooeyFiWidgetPage.h"
 
 namespace cbtek {
 namespace products {
 namespace gooeyfi {
 namespace core {
 
-class GooeyFiParser 
+class GooeyFiApp
 {
 public:
-    //! Constructor for GooeyFiParser
+    //! Constructor for GooeyFiApp
     /*!
-        Detailed description for GooeyFiParser
+        Detailed description for GooeyFiApp
     */
-    GooeyFiParser(const std::string& filePath);
+    GooeyFiApp(const std::string& filePath);
     
-    void addWidget();
+    /**
+     * @brief addPage
+     * @param page
+     */
+    void addPage(const GooeyFiWidgetPage& page);
+
+    /**
+     * @brief getPage
+     * @param index
+     * @return
+     */
+    const GooeyFiWidgetPage& getPage(size_t index) const;
+
+    /**
+     * @brief getPageCount
+     * @return
+     */
+    size_t getPageCount() const;
+
+    /**
+     * @brief getPages
+     * @return
+     */
+    const std::vector<GooeyFiWidgetPage> &getPages() const;
+
+    /**
+     * @brief setPages
+     * @param pages
+     */
+    void setPages(const std::vector<GooeyFiWidgetPage>& pages);
+
+    /**
+     * @brief read
+     */
+    void read();
+
+    /**
+     * @brief write
+     */
+    void write();
 
     //! Destructor
-    ~GooeyFiParser();	
+    ~GooeyFiApp();
 
 private:
-    
+    std::string m_currentFilePath;
+    std::string m_title;
+    std::vector<GooeyFiWidgetPage> m_pages;
 };
 }}}}//end namespace
 

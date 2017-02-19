@@ -45,11 +45,6 @@ GooeyFiWidgetImpl::~GooeyFiWidgetImpl()
 
 }
 
-void GooeyFiWidgetImpl::setWidgetType(const GooeyFiWidgetType & value)
-{
-    m_widgetType=value;
-}
-
 void GooeyFiWidgetImpl::setLabel(const std::string & value)
 {
     m_label=value;
@@ -61,11 +56,6 @@ void GooeyFiWidgetImpl::setId(const std::string & value)
 }
 
 
-
-const GooeyFiWidgetType &GooeyFiWidgetImpl::getWidgetType() const
-{
-    return m_widgetType;
-}
 
 const std::string &GooeyFiWidgetImpl::getLabel() const
 {

@@ -34,10 +34,19 @@ namespace products {
 namespace gooeyfi {
 namespace core {
 
+inline static std::string getTextInputTypeStr(GooeyFiTextInputType type)
+{
+    switch(type)
+    {
+        case GooeyFiTextInputType::MultiLine: return "MULTI";
+        case GooeyFiTextInputType::Password: return "PASSWORD";
+        default: return "SINGLE";
+    }
+}
 
 GooeyFiTextInput::GooeyFiTextInput()
 {
-
+    m_type = GooeyFiTextInputType::SingleLine;
 }
 
 GooeyFiTextInput::~GooeyFiTextInput()
@@ -55,6 +64,28 @@ void GooeyFiTextInput::setText(const std::string & value)
 const std::string &GooeyFiTextInput::getText() const
 {
     return m_text;
+}
+
+void GooeyFiTextInput::write(common::utility::XMLStreamWriter &xml)
+{
+    xml.writeAttribute("value",m_text);
+    xml.writeAttribute("style",getTextInputTypeStr(m_type));
+
+}
+
+void GooeyFiTextInput::setType(GooeyFiTextInputType type)
+{
+    m_type = type;
+}
+
+GooeyFiTextInputType GooeyFiTextInput::getType() const
+{
+    return m_type;
+}
+
+GooeyFiWidgetType GooeyFiTextInput::getWidgetType() const
+{
+    return GooeyFiWidgetType::TextInput;
 }
 
 

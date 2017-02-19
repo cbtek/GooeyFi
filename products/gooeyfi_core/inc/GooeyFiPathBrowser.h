@@ -55,7 +55,7 @@ public:
     * @brief Setter for m_buttonType
     * @param Value to replace m_buttonType
     */
-    void setButtonType(const GooeyFiPathBrowserType & value);
+    void setType(const GooeyFiPathBrowserType & value);
 
     /**
     * @brief Setter for m_pathValue
@@ -74,7 +74,7 @@ public:
     * @brief Getter for m_buttonType
     * @return Return copy of m_buttonType
     */
-    const GooeyFiPathBrowserType & getButtonType() const;
+    const GooeyFiPathBrowserType & getType() const;
 
     /**
     * @brief Getter for m_pathValue
@@ -89,12 +89,23 @@ public:
     const std::string & getBrowseButtonLabel() const;
 
 
+    /**
+     * @brief getWidgetType
+     * @return
+     */
+    GooeyFiWidgetType getWidgetType() const;
+
+    /**
+     * @brief write
+     * @param xml
+     */
+    void write(cbtek::common::utility::XMLStreamWriter& xml);
 
     //! Destructor
     ~GooeyFiPathBrowser();	
 
 private:
-        GooeyFiPathBrowserType m_buttonType;
+    GooeyFiPathBrowserType m_type;
     std::string m_pathValue;
     std::string m_browseButtonLabel;
 

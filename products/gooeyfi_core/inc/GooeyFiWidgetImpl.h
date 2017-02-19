@@ -46,12 +46,6 @@ public:
     GooeyFiWidgetImpl();
 
     /**
-    * @brief Setter for m_widgetType
-    * @param Value to replace m_widgetType
-    */
-    void setWidgetType(const GooeyFiWidgetType & value);
-
-    /**
     * @brief Setter for m_label
     * @param Value to replace m_label
     */
@@ -68,7 +62,7 @@ public:
     * @brief Getter for m_widgetType
     * @return Return copy of m_widgetType
     */
-    const GooeyFiWidgetType & getWidgetType() const;
+    GooeyFiWidgetType getWidgetType() const = 0;
 
     /**
     * @brief Getter for m_label

@@ -37,7 +37,7 @@ namespace core {
 class GooeyFiWidgetFactory 
 {
 public:
-    GooeyFiWidgetPtr create(const std::string& commaSeperatedNameValuePairsParams);
+    static GooeyFiWidgetPtr create(const std::string& commaSeperatedNameValuePairParams);
 
 private:
     //! Private constructor for GooeyFiWidgetFactory
